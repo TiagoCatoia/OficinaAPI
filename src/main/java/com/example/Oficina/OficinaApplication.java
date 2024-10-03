@@ -1,13 +1,13 @@
-package com.example.ConcertoDeCarro;
+package com.example.Oficina;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ConcertoDeCarroApplication {
+public class OficinaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ConcertoDeCarroApplication.class, args);
+		SpringApplication.run(OficinaApplication.class, args);
 	}
 
 }
