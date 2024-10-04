@@ -1,0 +1,13 @@
+{
+  "data_entrada": "01/10/2024",
+  "data_saida": "03/10/2024",
+  "mecanico_responsavel": {
+    "nome_mecanico": "Ghideli",
+    "anos_experiencia_mecanico": 35
+  },
+  "veiculo": {
+    "nome_veiculo": "Honda fit",
+    "modelo_veiculo": "Hatch",
+    "ano_veiculo": 2024
+  }
+}
