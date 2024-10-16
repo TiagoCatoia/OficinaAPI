@@ -1,20 +1,20 @@
 package com.example.Oficina.conserto;
 
-import com.example.Oficina.mecanico.Mecanico;
-import com.example.Oficina.veiculo.Veiculo;
+import com.example.Oficina.mecanico.MecanicoDTO;
+import com.example.Oficina.veiculo.VeiculoDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record ConsertoDTO(
-        @NotNull(message = "A data de entrada é obrigatória")
         @NotBlank(message = "A data de entrada é obrigatória")
         String data_entrada,
-        @NotNull(message = "Data de saída obrigatória")
         @NotBlank(message = "Data de saída obrigatória")
         String data_saida,
+        @NotNull(message = "Nome do veículo é obrigatório")
         @Valid
-        Mecanico mecanico_responsavel,
+        MecanicoDTO mecanico_responsavel,
+        @NotNull(message = "Nome do veículo é obrigatório")
         @Valid
-        Veiculo veiculo
+        VeiculoDTO veiculo
 ) { }

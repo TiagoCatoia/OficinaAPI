@@ -2,7 +2,9 @@ package com.example.Oficina.controller;
 
 import com.example.Oficina.conserto.Conserto;
 import com.example.Oficina.conserto.ConsertoDTO;
+import com.example.Oficina.mecanico.Mecanico;
 import com.example.Oficina.repository.ConsertoRepository;
+import com.example.Oficina.veiculo.Veiculo;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +33,7 @@ public class ConsertoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> listarConserto(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Object> listarConseto(@PathVariable(value = "id") Long id) {
         Optional<Conserto> optionalConserto = repository.findById(id);
         if (optionalConserto.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Conserto não encontrado.");
@@ -50,8 +52,8 @@ public class ConsertoController {
 
         conserto.setData_entrada(consertoDTO.data_entrada());
         conserto.setData_saida(consertoDTO.data_saida());
-        conserto.setMecanico_responsavel(consertoDTO.mecanico_responsavel());
-        conserto.setVeiculo(consertoDTO.veiculo());
+        conserto.setMecanico_responsavel(new Mecanico(consertoDTO.mecanico_responsavel()));
+        conserto.setVeiculo(new Veiculo(consertoDTO.veiculo()));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(conserto));
     }

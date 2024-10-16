@@ -29,7 +29,7 @@ public class Conserto {
     public Conserto(ConsertoDTO consertoDTO) {
         this.data_entrada = consertoDTO.data_entrada();
         this.data_saida = consertoDTO.data_saida();
-        this.mecanico_responsavel = consertoDTO.mecanico_responsavel();
-        this.veiculo = consertoDTO.veiculo();
+        this.mecanico_responsavel = new Mecanico(consertoDTO.mecanico_responsavel());
+        this.veiculo = new Veiculo(consertoDTO.veiculo());
     }
 }

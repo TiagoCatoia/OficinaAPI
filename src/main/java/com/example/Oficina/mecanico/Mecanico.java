@@ -1,8 +1,6 @@
 package com.example.Oficina.mecanico;
 
 import jakarta.persistence.Embeddable;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Mecanico {
-    @NotNull(message = "Nome do mecânico é obrigatório")
-    @NotBlank(message = "Nome do mecânico é obrigatório")
     private String nome_mecanico;
     private int anos_experiencia_mecanico;
+
+    public Mecanico(MecanicoDTO mecanicoDTO) {
+        this.nome_mecanico = mecanicoDTO.nome_mecanico();
+        this.anos_experiencia_mecanico = mecanicoDTO.anos_experiencia_mecanico();
+    }
 }
