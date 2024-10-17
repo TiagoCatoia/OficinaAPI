@@ -2,11 +2,14 @@ package com.example.Oficina.controller;
 
 import com.example.Oficina.conserto.Conserto;
 import com.example.Oficina.conserto.ConsertoDTO;
+import com.example.Oficina.conserto.DetalhesConsertoDTO;
 import com.example.Oficina.mecanico.Mecanico;
 import com.example.Oficina.repository.ConsertoRepository;
 import com.example.Oficina.veiculo.Veiculo;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,12 +31,27 @@ public class ConsertoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Conserto>> listarConsertos() {
-        return ResponseEntity.status(HttpStatus.OK).body(repository.findAll());
+    public ResponseEntity<Page<Conserto>> listarConsertos(Pageable paginacao) {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                repository.findAll(paginacao)
+        );
+    }
+
+    @GetMapping("/detalhes")
+    public ResponseEntity<List<DetalhesConsertoDTO>> listarDetalhesConsertos() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                repository.findAll().stream().map(c -> new DetalhesConsertoDTO(
+                        c.getData_entrada(),
+                        c.getData_saida(),
+                        c.getMecanico_responsavel().getNome_mecanico(),
+                        c.getVeiculo().getNome_veiculo(),
+                        c.getVeiculo().getModelo_veiculo())
+                ).toList()
+        );
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> listarConseto(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Object> listarConserto(@PathVariable(value = "id") Long id) {
         Optional<Conserto> optionalConserto = repository.findById(id);
         if (optionalConserto.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Conserto não encontrado.");
