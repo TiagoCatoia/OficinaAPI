@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 public record ConsertoDTO(
+        Long id,
         @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "Data não está no formato: dd/mm/yyyy")
         String data_entrada,
         @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "Data não está no formato: dd/mm/yyyy")
@@ -19,7 +20,9 @@ public record ConsertoDTO(
         VeiculoDTO veiculo
 ) {
         public ConsertoDTO(Conserto conserto) {
-                this(   conserto.getData_entrada(),
+                this(
+                        conserto.getId(),
+                        conserto.getData_entrada(),
                         conserto.getData_saida(),
                         new MecanicoDTO(conserto.getMecanico_responsavel()),
                         new VeiculoDTO(conserto.getVeiculo())
